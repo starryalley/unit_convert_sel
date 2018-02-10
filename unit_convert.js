@@ -3,7 +3,7 @@
 // for quantity such as "1 + 1/2 cup"
 const num_add_fraction_re = /(?:\d+\s?\+\s?\d+\s*\/\s*\d+|\d+\s*\/\s*\d+)/;
 // for normal numbers such as "-123,423,000.12"
-const number_re = /(^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?)/;
+const number_re = /(^[\-−]?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?)/;
 
 const quantity_re = new RegExp("(" + num_add_fraction_re.source + "|" +
                              number_re.source + ")\\s*");
@@ -459,7 +459,9 @@ function unit_convert(input_text) {
         r = input_text.match(u.final_re);
         if (r != null && r[1] != null) {
             console.log(TAG + " unit:" + u.unit + " matched");
-            v = eval(r[1].replace(",", ""));
+            // replace dash(—) with hyphen (-)
+            //  and delete all commas, finally eval it
+            v = eval(r[1].replace(",", "").replace("−", "-"));
             conversions = convert().from(u.unit).possibilities();
             console.log(TAG + " possibly conversions: " + conversions);
             conversions.forEach((c) => {
