@@ -1,5 +1,12 @@
-// regexp to match numbers preceding the unit
-const number_re = /(^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?)\s?/;
+// regexp to match quantity numbers preceding the unit
+
+// for quantity such as "1 + 1/2 cup"
+const num_add_fraction_re = /(?:\d+\s?\+\s?\d+\s*\/\s*\d+|\d+\s*\/\s*\d+)/;
+// for normal numbers such as "-123,423,000.12"
+const number_re = /(^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?)/;
+
+const quantity_re = new RegExp("(" + num_add_fraction_re.source + "|" +
+                             number_re.source + ")\\s*");
 
 // the long and huge tables storing the unit's name and how to match
 // this specific unit from plain text.
@@ -446,13 +453,13 @@ function unit_convert(input_text) {
     tables.forEach((u, index) => {
         // build regular expression by concatenating number with unit's matching re
         if (!('final_re' in u))
-            u.final_re = new RegExp(number_re.source + u.re.source, 'i');
+            u.final_re = new RegExp(quantity_re.source + u.re.source, 'i');
 
         // match with input text
         r = input_text.match(u.final_re);
         if (r != null && r[1] != null) {
             console.log(TAG + " unit:" + u.unit + " matched");
-            v = parseFloat(r[1].replace(",", ""));
+            v = eval(r[1].replace(",", ""));
             conversions = convert().from(u.unit).possibilities();
             console.log(TAG + " possibly conversions: " + conversions);
             conversions.forEach((c) => {
