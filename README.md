@@ -7,10 +7,13 @@ Published at: https://chrome.google.com/webstore/detail/unit-convert-selection/i
 
 ## Screenshots
 
+This is how the chrome extension works like when you select "3,700 meters" in a web page:
+
 ![screenshot](screenshot/screenshot_1280.png)
 
 
-![Usage](screenshot/promotional_920.png)
+
+![Usage](screenshot/promotional_tile_920.png)
 
 ## About Unit Conversion
 
