@@ -19,5 +19,5 @@ This is how the chrome extension works like when you select "3,700 meters" in a 
 
 The unit conversion is done entirely by [convert-units](https://github.com/ben-ng/convert-units) by Ben Ng. 
 
-[Lodash](lodash.com) each()/keys() are also used by convert-units so it's included in this project as a custom build min js file.
+[Lodash](http://lodash.com) each()/keys() are also used by convert-units so it's included in this project as a custom build min js file.
 
