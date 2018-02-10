@@ -397,7 +397,7 @@ let tables = [
         re: /(tsp|teaspoons?)$/,
     },
     {
-        unit: "tbs",
+        unit: "Tbs",
         re: /(tbs|tablespoons?)$/,
     },
     {
