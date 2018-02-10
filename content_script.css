@@ -1,0 +1,34 @@
+.unit_conversion_bubble {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: solid 1px;
+  border-radius: 4px;
+  box-shadow: 0 0 20px;
+  padding: 9px;
+  display: block;
+  font: arial, sans-serif;
+  font-size: 80%;
+  background:-webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#e6e6e6));
+}
+
+.bubble_ext_name {
+  color: #666666;
+  margin: 5px;
+  font-size: 50%;
+  text-align: right;
+}
+
+.bubble_title {
+  font-weight: bold;
+  font: arial, sans-serif;
+  color: #000066;
+  margin: 10px;
+  font-size: 100%;
+}
+
+.bubble_hr {
+  height: 1px;
+  background-color: #aaa;
+}
