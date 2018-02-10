@@ -17,7 +17,8 @@ document.addEventListener('mouseup', (e) => {
             // [original selected text], and then all compatible conversions,
             //  and then a footer line with this extension's name
             result =  "<p class=\"bubble_title\">[" + selection + "]</p>" +
-                result.replace(/,/g, "<hr class=\"bubble_hr\">") +
+                "<p class=\"bubble_content\">" +
+                result.replace(/,/g, "<hr class=\"bubble_hr\">") + "</p>" +
                 "<p class=\"bubble_ext_name\">Unit Convert Selected Text</p>";
             // show the bubble
             showBubble(e.clientX, e.clientY, result);
