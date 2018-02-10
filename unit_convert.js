@@ -298,19 +298,19 @@ let tables = [
     // ==== temperature ====
     {
         unit: "C",
-        re: /(°?C|degree\sCelsius)$/,
+        re: /(°?C|degrees?\sCelsius|degrees?\sC)$/,
     },
     {
         unit: "K",
-        re: /(°?K|degree\sKelvin)$/,
+        re: /(°?K|degrees?\sKelvin|degrees?\sK)$/,
     },
     {
         unit: "F",
-        re: /(°?F|degree\sFahrenheit)$/,
+        re: /(°?F|degrees?\sFahrenheit|degrees?\sF)$/,
     },
     {
         unit: "R",
-        re: /(°?R|degree\sRankine)$/,
+        re: /(°?R|degrees?\sRankine|degrees?\sR)$/,
     },
     // ==== time ====
     {
@@ -406,7 +406,7 @@ let tables = [
     },
     {
         unit: "fl-oz",
-        re: /(fl[\-\s]oz|fluid\sounces?)$/,
+        re: /(fl\.?[\-\s]oz\.?|fluid\sounces?)$/,
     },
     {
         unit: "cup",
