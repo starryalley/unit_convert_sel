@@ -3,7 +3,9 @@ Unit Convert Selection
 
 A chrome extension which instantly converts unit from your selected text in any web pages.
 
-Published at: https://chrome.google.com/webstore/detail/unit-convert-selection/ibdppaaieeojldgandjjlmjfbnjiciji
+<a href='https://chrome.google.com/webstore/detail/unit-convert-selection/ibdppaaieeojldgandjjlmjfbnjiciji'>
+<img alt='Available in Chrome Web Store' src='https://developer.chrome.com/webstore/images/ChromeWebStore_Badge_v2_206x58.png'/></a>
+
 
 ## Screenshots
 
