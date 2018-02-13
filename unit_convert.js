@@ -5,7 +5,7 @@ const num_add_fraction_re = /(?:\d+\s?\+\s?\d+\s*\/\s*\d+|\d+\s*\/\s*\d+)/;
 // for normal numbers such as "-123,423,000.12"
 const number_re = /(^[\-−]?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?)/;
 // for height
-const height_re = /^((\d+)[\'’]\s*(\d+)["”]?|(\d+)\s*ft\s*(\d+)\s*in)\s*$/;
+const height_re = /^((\d+)[\'’′]\s*(\d+)["”″]?|(\d+)\s*ft\s*(\d+)\s*in|(\d+)\s*feet\s*(\d+)\s*inche?s?)\s*$/;
 
 const quantity_re = new RegExp("(" + num_add_fraction_re.source + "|" +
                              number_re.source + ")\\s*");
@@ -189,7 +189,7 @@ let tables = [
     },
     {
         unit: "in",
-        re: /("|in|inch|inches)$/,
+        re: /("|”|″|in|inch|inches)$/,
     },
     {
         unit: "yd",
@@ -201,7 +201,7 @@ let tables = [
     },
     {
         unit: "ft",
-        re: /(\'|ft|foot|feet)$/,
+        re: /(\'|’|′|ft|foot|feet)$/,
     },
     {
         unit: "mi",
@@ -456,10 +456,11 @@ function unit_convert(input_text) {
     // special cases first, currently there is only one
     r = input_text.match(height_re);
     if (r != null) {
-        console.log (r);
-        let v = parseInt(r[1]) * 12 + parseInt(r[2]);
+        let v = parseInt(r[2]) * 12 + parseInt(r[3]);//5'8"
         if (isNaN(v))
-            v = parseInt(r[4]) * 12 + parseInt(r[5]);
+            v = parseInt(r[4]) * 12 + parseInt(r[5]);//5 ft 8 in
+        if (isNaN(v))
+            v = parseInt(r[6]) * 12 + parseInt(r[7]);//5 feet 8 inches
         console.log(TAG + " quantity:" + v);
         conversions = convert().from('in').possibilities();
         console.log(TAG + " possibly conversions: " + conversions);
