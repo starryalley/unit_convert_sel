@@ -4,6 +4,8 @@
 const num_add_fraction_re = /(?:\d+\s?\+\s?\d+\s*\/\s*\d+|\d+\s*\/\s*\d+)/;
 // for normal numbers such as "-123,423,000.12"
 const number_re = /(^[\-−]?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?)/;
+// for height
+const height_re = /^((\d+)[\'’]\s*(\d+)["”]?|(\d+)\s*ft\s*(\d+)\s*in)\s*$/;
 
 const quantity_re = new RegExp("(" + num_add_fraction_re.source + "|" +
                              number_re.source + ")\\s*");
@@ -187,7 +189,7 @@ let tables = [
     },
     {
         unit: "in",
-        re: /(in|inch|inches)$/,
+        re: /("|in|inch|inches)$/,
     },
     {
         unit: "yd",
@@ -199,7 +201,7 @@ let tables = [
     },
     {
         unit: "ft",
-        re: /(ft|foot|feet)$/,
+        re: /(\'|ft|foot|feet)$/,
     },
     {
         unit: "mi",
@@ -450,6 +452,24 @@ function unit_convert(input_text) {
     let res = "";
 
     console.log(TAG + " selected text: \"" + input_text + "\"");
+
+    // special cases first, currently there is only one
+    r = input_text.match(height_re);
+    if (r != null) {
+        console.log (r);
+        let v = parseInt(r[1]) * 12 + parseInt(r[2]);
+        if (isNaN(v))
+            v = parseInt(r[4]) * 12 + parseInt(r[5]);
+        console.log(TAG + " quantity:" + v);
+        conversions = convert().from('in').possibilities();
+        console.log(TAG + " possibly conversions: " + conversions);
+        conversions.forEach((c) => {
+            res = res + "," + convert(v).from('in').to(c).toPrecision(6) + " " + c;
+        });
+        return res;
+    }
+
+    // general case, loop through all supported units
     tables.forEach((u, index) => {
         // build regular expression by concatenating number with unit's matching re
         if (!('final_re' in u))
@@ -461,6 +481,7 @@ function unit_convert(input_text) {
             console.log(TAG + " unit:" + u.unit + " matched");
             // replace dash(—) with hyphen (-)
             //  and delete all commas, finally eval it
+            console.log(TAG + " quantity: " + r[1]);
             v = eval(r[1].replace(",", "").replace("−", "-"));
             conversions = convert().from(u.unit).possibilities();
             console.log(TAG + " possibly conversions: " + conversions);
